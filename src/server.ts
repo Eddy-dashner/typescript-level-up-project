@@ -3,7 +3,8 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import product from "../Routes/productRoute"
+import productRoute from '../Routes/productRoute';
+import cartRoute from '../Routes/cartRoute'
 
 dotenv.config();
 
@@ -29,7 +30,10 @@ const port = 5500;
 
 //creating product
 
-app.use("/product",product)
+app.use("/product",productRoute)
+//create cart
+app.use("/cart",cartRoute)
+
 
 app.get('/', (req: Request, res: Response) => {
   res.send('MWIRIWE ARIKO');
