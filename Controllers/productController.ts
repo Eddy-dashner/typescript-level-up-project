@@ -1,5 +1,6 @@
 import product from "../Models/productModel";
 
+
 const createProduct = async (req:any, res:any):Promise<any> =>{
     try {
         const data =await product.create(req.body)
@@ -11,4 +12,14 @@ const createProduct = async (req:any, res:any):Promise<any> =>{
         res.sendStatus(500);
     };
 };
-export default createProduct;
+
+const getAllProduct = async (req:any, res:any):Promise<any> =>{
+    try {
+        const data = await product.find({});
+        res.status(200).send(data)
+    }catch (error){
+        console.error("error occured while getting products", error);
+        res.sendStatus(500);
+    };
+};
+export {createProduct, getAllProduct};
