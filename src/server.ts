@@ -4,13 +4,26 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import productRoute from '../Routes/productRoute';
-import cartRoute from '../Routes/cartRoute'
+import cartRoute from '../Routes/cartRoute';
+import multer from 'multer'
 
 dotenv.config();
 
+//config multer
+
+const storage = multer.diskStorage({
+  destination: 'uploads',
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage }).single('testImage');
+
+
 //connect to mongo db
 
-const MongoDB_connection_string ="mongodb+srv://eddynzobarinda910:makavela123@cluster0.sbzptlt.mongodb.net/?retryWrites=true&w=majority";
+const MongoDB_connection_string:any = (process.env.MONGOPASS);
 async function connectToMongoDB(connectionstring: string) {
   await mongoose.connect(connectionstring);
   console.log("connected to the database successfully!");
@@ -26,6 +39,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cors());
 app.use(cookieParser());
+app.use(upload);
 const port = 5500;
 
 //creating product
