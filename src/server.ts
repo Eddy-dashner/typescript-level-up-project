@@ -10,7 +10,7 @@ dotenv.config();
 
 //connect to mongo db
 
-const MongoDB_connection_string ="mongodb+srv://eddynzobarinda910:makavela123@cluster0.sbzptlt.mongodb.net/?retryWrites=true&w=majority";
+const MongoDB_connection_string:any = (process.env.MONGOPASS);
 async function connectToMongoDB(connectionstring: string) {
   await mongoose.connect(connectionstring);
   console.log("connected to the database successfully!");
