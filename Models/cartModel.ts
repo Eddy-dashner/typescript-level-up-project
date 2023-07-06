@@ -6,7 +6,11 @@ const cartSchema =new mongoose.Schema({
     },
     Amount:{
         type:Number
+    },
+    Quantity:{
+        type:Number
     }
+    
 })
 
 export default mongoose.model('cart',cartSchema)
